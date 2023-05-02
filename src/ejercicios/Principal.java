@@ -65,12 +65,12 @@ public class Principal extends JFrame {
 		contentPane.add(lblGrupoNro);
 		
 		final zEjercicio1 Contactos = new zEjercicio1();
+		final Ejercicio3 Seleccion = new Ejercicio3();
 		
 		JButton btnbtnEjercicio1 = new JButton("Ejercicio 1");
 		btnbtnEjercicio1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Contactos.setVisible(true);
-				dispose();
 			    
 			}
 		});
@@ -80,6 +80,7 @@ public class Principal extends JFrame {
 		JButton btnEjercicio3 = new JButton("Ejercicio 3");
 		btnEjercicio3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Seleccion.setVisible(true);
 			}
 		});
 		btnEjercicio3.setBounds(155, 113, 104, 25);
