@@ -16,6 +16,10 @@ import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -60,9 +64,14 @@ public class Principal extends JFrame {
 		lblGrupoNro.setHorizontalAlignment(SwingConstants.LEFT);
 		contentPane.add(lblGrupoNro);
 		
+		final zEjercicio1 Contactos = new zEjercicio1();
+		
 		JButton btnbtnEjercicio1 = new JButton("Ejercicio 1");
 		btnbtnEjercicio1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Contactos.setVisible(true);
+				dispose();
+			    
 			}
 		});
 		btnbtnEjercicio1.setBounds(155, 39, 104, 25);
