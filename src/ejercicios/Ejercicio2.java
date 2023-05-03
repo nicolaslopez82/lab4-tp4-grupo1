@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class Ejercicio2 extends JFrame {
 
@@ -44,7 +46,8 @@ public class Ejercicio2 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Ejercicio2() {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Ejercicio2() {		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 468, 393);
 		contentPane = new JPanel();
@@ -78,9 +81,21 @@ public class Ejercicio2 extends JFrame {
 		lblTps.setBounds(33, 104, 46, 14);
 		panel1.add(lblTps);
 		
-		JComboBox cBoxAprobadoDesaprobado = new JComboBox();
+		JComboBox cBoxAprobadoDesaprobado = new JComboBox();			
 		cBoxAprobadoDesaprobado.setModel(new DefaultComboBoxModel(new String[] {"Aprobado", "Desaprobado"}));
 		cBoxAprobadoDesaprobado.setBounds(81, 101, 111, 20);
+		cBoxAprobadoDesaprobado.setSelectedIndex(0);
+		cBoxAprobadoDesaprobado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String newItemSelected = (String) cBoxAprobadoDesaprobado.getSelectedItem();			
+				if(newItemSelected.equals("Aprobado")) {
+					cBoxAprobadoDesaprobado.setSelectedIndex(0);
+				}else {
+					cBoxAprobadoDesaprobado.setSelectedIndex(1);
+				}	
+			}
+		});
+						
 		panel1.add(cBoxAprobadoDesaprobado);
 		
 		txtNota1 = new JTextField();
@@ -124,6 +139,8 @@ public class Ejercicio2 extends JFrame {
 		txtCondicion.setBounds(109, 51, 111, 20);
 		panel2.add(txtCondicion);
 		
+		
+		
 		JButton btnCalcular = new JButton("CALCULAR");
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,7 +151,47 @@ public class Ejercicio2 extends JFrame {
 				num3 = Float.parseFloat(txtNota3.getText());
 				
 				promedio = obtenerPromedio(num1,num2,num3);
-				txtPromedio.setText(Float.toString(promedio));
+				txtPromedio.setText(Float.toString(promedio));		
+							
+				/**
+				 * Siempre que el TP esté en condición Desaprobado, la condición del alumno es
+				   libre independientemente de las tres notas numéricas obtenidas.
+				 */
+				if(cBoxAprobadoDesaprobado.getSelectedItem().equals("Desaprobado")) {
+					txtCondicion.setText("Libre");
+				}				
+				
+				
+				/**
+				 * Si alguna de las tres notas del alumno es inferior a 6, la condición del alumno
+				   es libre independientemente de la nota del TP
+				 */
+				int nNota1, nNota2, nNota3;
+				nNota1 = Integer.parseInt(txtNota1.getText());
+				nNota2 = Integer.parseInt(txtNota1.getText());
+				nNota3 = Integer.parseInt(txtNota1.getText());
+				if(nNota1 < 6 || nNota2 < 6 || nNota3 < 6) {
+					txtCondicion.setText("Libre");
+				}
+				
+				
+				/**
+				 * Si la nota de los tres parciales es superior o igual a 8 y el TP se encuentra
+				   aprobado, entonces la condición es promocionado. 
+				 */
+				if(nNota1 >= 8 && nNota2 >= 8 && nNota3 >= 8 && cBoxAprobadoDesaprobado.getSelectedItem().equals("Aprobado")) {
+					txtCondicion.setText("Promocionado");
+				}
+				
+				
+				/**
+				 * Si los tres parciales se encuentran en el rango de notas entre 6 y 8 y el Tp se
+				   encuentra aprobado, entonces la condición es regular. 
+				 */
+				if(nNota1 >= 6 && nNota1 < 8 && nNota2 >= 6 && nNota2 < 8 && nNota3 >= 6 && nNota3 < 8 
+						&& cBoxAprobadoDesaprobado.getSelectedItem().equals("Aprobado")) {
+					txtCondicion.setText("Regular");
+				}
 			}
 
 			private float obtenerPromedio(float num1, float num2, float num3) {
@@ -151,10 +208,25 @@ public class Ejercicio2 extends JFrame {
 		contentPane.add(btnCalcular);
 		
 		JButton btnNuevo = new JButton("NUEVO");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtNota1.setText("");
+				txtNota2.setText("");
+				txtNota3.setText("");
+				cBoxAprobadoDesaprobado.setSelectedIndex(0);
+				txtPromedio.setText("");
+				txtCondicion.setText("");
+			}
+		});
 		btnNuevo.setBounds(293, 131, 111, 32);
 		contentPane.add(btnNuevo);
 		
 		JButton btnSalir = new JButton("SALIR");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnSalir.setBounds(293, 174, 111, 32);
 		contentPane.add(btnSalir);
 	}
