@@ -30,18 +30,18 @@ public class Ejercicio2 extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ejercicio2 frame = new Ejercicio2();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Ejercicio2 frame = new Ejercicio2();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -166,11 +166,11 @@ public class Ejercicio2 extends JFrame {
 				 * Si alguna de las tres notas del alumno es inferior a 6, la condición del alumno
 				   es libre independientemente de la nota del TP
 				 */
-				int nNota1, nNota2, nNota3;
-				nNota1 = Integer.parseInt(txtNota1.getText());
-				nNota2 = Integer.parseInt(txtNota1.getText());
-				nNota3 = Integer.parseInt(txtNota1.getText());
-				if(nNota1 < 6 || nNota2 < 6 || nNota3 < 6) {
+				Float fNota1, fNota2, fNota3;
+				fNota1 = Float.parseFloat(txtNota1.getText());
+				fNota2 = Float.parseFloat(txtNota2.getText());
+				fNota3 = Float.parseFloat(txtNota3.getText());
+				if(fNota1 < 6 || fNota2 < 6 || fNota3 < 6) {
 					txtCondicion.setText("Libre");
 				}
 				
@@ -179,7 +179,7 @@ public class Ejercicio2 extends JFrame {
 				 * Si la nota de los tres parciales es superior o igual a 8 y el TP se encuentra
 				   aprobado, entonces la condición es promocionado. 
 				 */
-				if(nNota1 >= 8 && nNota2 >= 8 && nNota3 >= 8 && cBoxAprobadoDesaprobado.getSelectedItem().equals("Aprobado")) {
+				if(fNota1 >= 8 && fNota2 >= 8 && fNota3 >= 8 && cBoxAprobadoDesaprobado.getSelectedItem().equals("Aprobado")) {
 					txtCondicion.setText("Promocionado");
 				}
 				
@@ -188,7 +188,7 @@ public class Ejercicio2 extends JFrame {
 				 * Si los tres parciales se encuentran en el rango de notas entre 6 y 8 y el Tp se
 				   encuentra aprobado, entonces la condición es regular. 
 				 */
-				if(nNota1 >= 6 && nNota1 < 8 && nNota2 >= 6 && nNota2 < 8 && nNota3 >= 6 && nNota3 < 8 
+				if(fNota1 >= 6 && fNota1 <= 8 && fNota2 >= 6 && fNota2 <= 8 && fNota3 >= 6 && fNota3 <= 8 
 						&& cBoxAprobadoDesaprobado.getSelectedItem().equals("Aprobado")) {
 					txtCondicion.setText("Regular");
 				}
