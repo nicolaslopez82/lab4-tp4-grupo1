@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.JComboBox;
@@ -117,11 +119,13 @@ public class Ejercicio2 extends JFrame {
 		panel2.add(lblCondicion);
 
 		txtPromedio = new JTextField();
+		txtPromedio.setEditable(false);
 		txtPromedio.setColumns(10);
 		txtPromedio.setBounds(109, 26, 111, 20);
 		panel2.add(txtPromedio);
 
 		txtCondicion = new JTextField();
+		txtCondicion.setEditable(false);
 		txtCondicion.setColumns(10);
 		txtCondicion.setBounds(109, 51, 111, 20);
 		panel2.add(txtCondicion);
@@ -134,7 +138,9 @@ public class Ejercicio2 extends JFrame {
 				num1 = Float.parseFloat(txtNota1.getText());
 				num2 = Float.parseFloat(txtNota2.getText());
 				num3 = Float.parseFloat(txtNota3.getText());
-
+				
+				if ((num1 >= 0 && num1 <= 10) && (num2 >= 0 && num2 <= 10) && (num3 >= 0 && num3 <= 10))
+				{
 				promedio = obtenerPromedio(num1, num2, num3);
 				txtPromedio.setText(Float.toString(promedio));
 
@@ -173,6 +179,12 @@ public class Ejercicio2 extends JFrame {
 				if(fNota1 >= 6 && fNota1 <= 8 && fNota2 >= 6 && fNota2 <= 8 && fNota3 >= 6 && fNota3 <= 8 
 						&& cBoxAprobadoDesaprobado.getSelectedItem().equals("Aprobado")) {
 					txtCondicion.setText("Regular");
+				}
+				
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Las notas deben ser de 0 a 10");
 				}
 			}
 
