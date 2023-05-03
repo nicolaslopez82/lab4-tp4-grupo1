@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Ejercicio2 extends JFrame {
 
@@ -123,6 +125,28 @@ public class Ejercicio2 extends JFrame {
 		panel2.add(txtCondicion);
 		
 		JButton btnCalcular = new JButton("CALCULAR");
+		btnCalcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				float num1,num2,num3, promedio;
+				num1 = Float.parseFloat(txtNota1.getText());
+				num2 = Float.parseFloat(txtNota2.getText());
+				num3 = Float.parseFloat(txtNota3.getText());
+				
+				promedio = obtenerPromedio(num1,num2,num3);
+				txtPromedio.setText(Float.toString(promedio));
+			}
+
+			private float obtenerPromedio(float num1, float num2, float num3) {
+				
+				float promedio;
+				promedio = (num1 + num2 + num3)/3; 
+				
+				return promedio;
+			}
+
+
+		});
 		btnCalcular.setBounds(293, 88, 111, 32);
 		contentPane.add(btnCalcular);
 		
